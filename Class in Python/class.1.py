@@ -1,9 +1,9 @@
 class person:
-    def __init__(self,name,age):
+    def __init__(self,name):
         self.name=name
-        self.age=age
+        #self.age=age
     def say_hello(self):
         print("hello {} !".format(self.name))   
 
-adam = person('Adam',25)   
+adam = person('Adam')   
 adam.say_hello()  
