@@ -1,0 +1,11 @@
+Metadata-Version: 2.4
+Name: ai-mastery-course
+Version: 0.1.0
+Summary: Reproducible, practice-first AI course demonstrations
+Requires-Python: >=3.11
+Provides-Extra: test
+Requires-Dist: pytest>=8.0; extra == "test"
+Provides-Extra: notebooks
+Requires-Dist: jupyter>=1.0; extra == "notebooks"
+Requires-Dist: ipykernel>=6.29; extra == "notebooks"
+Requires-Dist: matplotlib>=3.8; extra == "notebooks"

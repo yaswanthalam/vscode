@@ -1,0 +1,4 @@
+2026-10-22T10:01:02Z lab-router Interface Ethernet1 changed state to down
+2026-10-22T10:01:05Z lab-router BGP neighbor 192.0.2.2 changed state to Idle
+2026-10-22T10:02:00Z lab-router Interface Ethernet1 changed state to up
+2026-10-22T10:02:15Z lab-router BGP neighbor 192.0.2.2 changed state to Established
