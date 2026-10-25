@@ -1,0 +1,10 @@
+digraph "Simple Web Application" {
+	graph [fontcolor="#2D3436" fontname="Sans-Serif" fontsize=15 label="Simple Web Application" nodesep=0.60 pad=2.0 rankdir=LR ranksep=0.75 splines=ortho]
+	node [fixedsize=true fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13 height=1.4 imagescale=true labelloc=b shape=box style=rounded width=1.4]
+	edge [color="#7B8894"]
+	"90779a324797441ab6e0df896988d2ca" [label=User height=1.9 image="C:\Users\v-yaalam\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\resources/onprem/client\users.png" shape=none]
+	"3cf71b6ec52b4217b885e5e6b10a05e4" [label="Web Server" height=1.9 image="C:\Users\v-yaalam\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\resources/onprem/compute\server.png" shape=none]
+	"90779a324797441ab6e0df896988d2ca" -> "3cf71b6ec52b4217b885e5e6b10a05e4" [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	c52f2828416444b9a11daae9fe04fdb0 [label=Database height=1.9 image="C:\Users\v-yaalam\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\resources/onprem/database\postgresql.png" shape=none]
+	"3cf71b6ec52b4217b885e5e6b10a05e4" -> c52f2828416444b9a11daae9fe04fdb0 [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+}

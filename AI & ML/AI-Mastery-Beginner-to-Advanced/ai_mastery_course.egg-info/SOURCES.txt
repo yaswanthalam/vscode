@@ -1,0 +1,8 @@
+README.md
+pyproject.toml
+ai_mastery_course.egg-info/PKG-INFO
+ai_mastery_course.egg-info/SOURCES.txt
+ai_mastery_course.egg-info/dependency_links.txt
+ai_mastery_course.egg-info/requires.txt
+ai_mastery_course.egg-info/top_level.txt
+tests/test_lesson_01.py

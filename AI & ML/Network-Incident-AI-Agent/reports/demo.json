@@ -1,0 +1,35 @@
+{
+  "mode": "deterministic_demo",
+  "report": "# Deterministic demo (no AI model used)\n\n## Observations\n- [L1] 2026-10-22T10:01:02Z lab-router Interface Ethernet1 changed state to down\n- [L2] 2026-10-22T10:01:05Z lab-router BGP neighbor 192.0.2.2 changed state to Idle\n- [L3] 2026-10-22T10:02:00Z lab-router Interface Ethernet1 changed state to up\n- [L4] 2026-10-22T10:02:15Z lab-router BGP neighbor 192.0.2.2 changed state to Established\n\n## Possible causes\nInsufficient evidence to confirm a root cause.\n\n## Missing evidence\nCurrent device state, topology, vendor/OS, and surrounding logs.\n\n## Next checks\n- Check current BGP neighbor state and last reset reason.\n- Check reachability and route to the peer in the correct VRF.\n- Compare local and remote logs, timers, and transport errors.\n- Check current interface operational and administrative state.\n- Inspect error counters, optical levels, and remote-end status.\n- Confirm which neighbors and routes use this interface.",
+  "evidence": {
+    "categories": [
+      "bgp",
+      "interface"
+    ],
+    "events": [
+      {
+        "line": 1,
+        "category": "interface",
+        "text": "2026-10-22T10:01:02Z lab-router Interface Ethernet1 changed state to down"
+      },
+      {
+        "line": 2,
+        "category": "bgp",
+        "text": "2026-10-22T10:01:05Z lab-router BGP neighbor 192.0.2.2 changed state to Idle"
+      },
+      {
+        "line": 3,
+        "category": "interface",
+        "text": "2026-10-22T10:02:00Z lab-router Interface Ethernet1 changed state to up"
+      },
+      {
+        "line": 4,
+        "category": "bgp",
+        "text": "2026-10-22T10:02:15Z lab-router BGP neighbor 192.0.2.2 changed state to Established"
+      }
+    ],
+    "total_events": 4,
+    "truncated": false,
+    "note": "Keyword matches are observations, not confirmed root causes. Input order may not be chronological."
+  }
+}
