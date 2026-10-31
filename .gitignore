@@ -1,0 +1,26 @@
+# Local credentials and private keys
+.env
+.env.*
+!.env.example
+!.env.*.example
+*.key
+*.pem
+.certs/
+known_hosts
+
+# Python environments and generated caches
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+
+# Local application data and logs
+*.db
+*.db-*
+*.sqlite3
+*.sqlite3-*
+audit.jsonl
+*.log

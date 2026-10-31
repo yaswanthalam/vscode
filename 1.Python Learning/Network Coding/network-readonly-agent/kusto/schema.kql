@@ -1,0 +1,5 @@
+// Administrator provisioning only. Never grant the running agent management privileges.
+.create table NetworkEvidence (Timestamp:datetime, Device:string, Check:string, EventType:string, Message:string, Actor:string, ChangeId:string)
+// Populate with your ingestion pipeline. Check: version/lacp/isis/history.
+// EventType: snapshot/version-change, normalized from authoritative sources.
+// Actor must come from an authoritative audit source. Never infer it from time proximity.

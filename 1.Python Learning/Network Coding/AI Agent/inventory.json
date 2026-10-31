@@ -1,0 +1,17 @@
+{
+  "R1": {
+    "host": "192.168.32.168",
+    "port": 22,
+    "description": "Cisco 7206VXR | E1/0 to R2: 10.12.12.1/30 | management E1/1"
+  },
+  "R2": {
+    "host": "192.168.32.167",
+    "port": 22,
+    "description": "Cisco 7206VXR | E1/0 to R1: 10.12.12.2/30 | E1/1 to R3: 10.23.23.1/30 | management E1/2"
+  },
+  "R3": {
+    "host": "192.168.32.166",
+    "port": 22,
+    "description": "Cisco 7206VXR | E1/1 to R2: 10.23.23.2/30 | management E1/0"
+  }
+}

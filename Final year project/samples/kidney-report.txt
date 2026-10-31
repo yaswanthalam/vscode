@@ -1,0 +1,5 @@
+age: 48
+systolic_bp: 125
+creatinine: 1.0
+blood_urea: 28
+hemoglobin: 13.2

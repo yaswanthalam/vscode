@@ -1,0 +1,17 @@
+{
+  "mode": "demo",
+  "allow_device_fallback": false,
+  "fallback_on_kusto_error": false,
+  "freshness_seconds": 900,
+  "audit_path": "audit.jsonl",
+  "known_hosts": "known_hosts",
+  "kusto": {"cluster": "https://YOUR-CLUSTER.REGION.kusto.windows.net", "database": "NetworkOps", "table": "NetworkEvidence"},
+  "ai": {"provider": "none", "endpoint": "https://YOUR-RESOURCE.services.ai.azure.com/openai/v1/responses", "deployment": "YOUR-DEPLOYMENT"},
+  "devices": {
+    "lab-router-01": {
+      "host": "192.0.2.10", "port": 22,
+      "username_env": "DEVICE_USERNAME", "password_env": "DEVICE_PASSWORD", "keyfile_env": "DEVICE_KEYFILE",
+      "commands": {"version": "show version", "lacp": "show lacp summary", "isis": "show isis neighbors", "history": "show logging"}
+    }
+  }
+}

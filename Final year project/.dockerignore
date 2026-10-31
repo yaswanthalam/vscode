@@ -1,0 +1,15 @@
+.venv
+.env
+.certs
+*.pem
+*.key
+*.cer
+.git
+.pytest_cache
+.ruff_cache
+**/__pycache__
+data
+tests
+samples
+*.csv
+*.log
