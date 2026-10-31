@@ -1,0 +1,65 @@
+# ---------------------------------------------------------------------------
+# Approved Kusto queries. The AI picks a template and supplies parameters;
+# it never writes free-form KQL. Parameters are passed as real Kusto query
+# parameters (declare query_parameters), so they cannot inject KQL.
+#
+# >>> Replace table and column names with the ones in YOUR cluster. <<<
+# ---------------------------------------------------------------------------
+templates:
+
+  device_os_version:
+    description: Current and historical OS version reported for a device (inventory snapshots).
+    params:
+      device: {type: string, pattern: '^[A-Za-z0-9._-]{1,64}$'}
+      days:   {type: int, min: 1, max: 365, default: 90}
+    query: |
+      declare query_parameters(device:string, days:int);
+      DeviceInventory
+      | where DeviceName =~ device and Timestamp > ago(days * 1d)
+      | summarize FirstSeen=min(Timestamp), LastSeen=max(Timestamp) by DeviceName, OsVersion
+      | order by FirstSeen asc
+
+  os_change_events:
+    description: Syslog lines about OS install / upgrade / downgrade / reload for a device.
+    params:
+      device: {type: string, pattern: '^[A-Za-z0-9._-]{1,64}$'}
+      days:   {type: int, min: 1, max: 365, default: 30}
+    query: |
+      declare query_parameters(device:string, days:int);
+      Syslog
+      | where DeviceName =~ device and Timestamp > ago(days * 1d)
+      | where Message has_any ("install", "upgrade", "downgrade", "boot image", "boot system", "reload", "software", "activate")
+      | project Timestamp, DeviceName, Severity, Message
+      | order by Timestamp desc
+      | take 200
+
+  who_ran_commands:
+    description: TACACS+/AAA command accounting for a device in a time window - answers WHO did something.
+    params:
+      device:  {type: string, pattern: '^[A-Za-z0-9._-]{1,64}$'}
+      start:   {type: datetime}
+      end:     {type: datetime}
+      keyword: {type: string, pattern: '^[A-Za-z0-9 ._:/-]{0,60}$', default: ''}
+    query: |
+      declare query_parameters(device:string, start:datetime, end:datetime, keyword:string);
+      TacacsAccounting
+      | where DeviceName =~ device and Timestamp between (start .. end)
+      | where isempty(keyword) or Command has keyword
+      | project Timestamp, DeviceName, UserName, SourceIp, Command
+      | order by Timestamp asc
+      | take 200
+
+  device_syslog_search:
+    description: Free-text search of a device's syslog for a keyword (e.g. LACP, ISIS, ADJCHANGE).
+    params:
+      device:  {type: string, pattern: '^[A-Za-z0-9._-]{1,64}$'}
+      keyword: {type: string, pattern: '^[A-Za-z0-9 ._:/-]{1,60}$'}
+      hours:   {type: int, min: 1, max: 720, default: 24}
+    query: |
+      declare query_parameters(device:string, keyword:string, hours:int);
+      Syslog
+      | where DeviceName =~ device and Timestamp > ago(hours * 1h)
+      | where Message has keyword
+      | project Timestamp, DeviceName, Severity, Message
+      | order by Timestamp desc
+      | take 200

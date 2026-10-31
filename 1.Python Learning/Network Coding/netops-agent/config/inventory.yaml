@@ -1,0 +1,12 @@
+# Only devices listed here can be reached. platform must be a Netmiko
+# device_type: cisco_xr, cisco_nxos, cisco_ios, arista_eos, juniper_junos ...
+devices:
+  - name: rtr-lab-01
+    host: 10.0.0.11
+    platform: cisco_xr
+  - name: sw-lab-02
+    host: 10.0.0.12
+    platform: arista_eos
+  - name: mx-lab-03
+    host: 10.0.0.13
+    platform: juniper_junos

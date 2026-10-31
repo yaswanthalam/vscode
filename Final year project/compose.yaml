@@ -1,0 +1,19 @@
+services:
+  web:
+    build: .
+    ports:
+      - "127.0.0.1:8000:8000"
+    environment:
+      APP_ENV: development
+      APP_ORIGIN: https://127.0.0.1:8000
+      TLS_CERT_FILE: /certs/server.pem
+      TLS_KEY_FILE: /certs/server-key.pem
+      ALLOW_DEMO_MODELS: "true"
+      DATA_DIR: /data
+      MODEL_DIR: /app/models
+    volumes:
+      - healthlens-data:/data
+      - ./.certs:/certs:ro
+    restart: unless-stopped
+volumes:
+  healthlens-data:

@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NetOps Read-Only Agent</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header>
+  <h1>NetOps Read-Only Agent</h1>
+  <span id="mode" class="pill"></span>
+  <span id="user" class="muted"></span>
+</header>
+
+<nav>
+  <button class="tab active" data-tab="ask">Ask the agent</button>
+  <button class="tab" data-tab="run">Run a show command</button>
+  <button class="tab" data-tab="audit">Audit log</button>
+</nav>
+
+<main>
+  <section id="tab-ask" class="panel">
+    <p class="muted">Kusto is checked first. The device is used only if Kusto can't answer.</p>
+    <textarea id="question" rows="3" placeholder="e.g. When was the OS on rtr-lab-01 downgraded and who did it?"></textarea>
+    <div class="examples">
+      <button class="chip">When was the OS on rtr-lab-01 downgraded and who did it?</button>
+      <button class="chip">Was sw-lab-02 downgraded recently? Who did it?</button>
+      <button class="chip">Check LACP on sw-lab-02</button>
+      <button class="chip">Are IS-IS neighbors up on mx-lab-03?</button>
+    </div>
+    <button id="askBtn" class="primary">Ask</button>
+    <div id="answer" class="card hidden"></div>
+    <div id="steps"></div>
+  </section>
+
+  <section id="tab-run" class="panel hidden">
+    <div class="row">
+      <label>Device <select id="device"></select></label>
+      <label class="grow">Command <input id="command" placeholder="show version" autocomplete="off"></label>
+    </div>
+    <label>Purpose (helps the AI check the command fits) <input id="purpose" placeholder="e.g. confirm current OS version"></label>
+    <div class="examples">
+      <button class="chip cmd">show version</button>
+      <button class="chip cmd">show lacp summary</button>
+      <button class="chip cmd">show isis neighbors</button>
+      <button class="chip cmd">show logging | include install</button>
+      <button class="chip cmd">reload</button>
+    </div>
+    <div class="row">
+      <button id="validateBtn">Validate</button>
+      <button id="runBtn" class="primary">Validate &amp; run</button>
+    </div>
+    <div id="validation" class="card hidden"></div>
+    <pre id="output" class="hidden"></pre>
+  </section>
+
+  <section id="tab-audit" class="panel hidden">
+    <button id="refreshAudit">Refresh</button>
+    <table id="auditTable"><thead><tr><th>Time (UTC)</th><th>User</th><th>Action</th><th>Details</th></tr></thead><tbody></tbody></table>
+  </section>
+</main>
+<script src="/static/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="HealthLens educational multi-disease machine learning research workspace">
+  <title>HealthLens | Research workspace</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <header>
+    <a class="brand" href="/">H<span>+</span> HealthLens</a>
+    <span class="badge">RESEARCH EDITION</span>
+    <div id="identity" hidden><span id="username"></span><button id="logout" class="quiet">Sign out</button></div>
+  </header>
+  <div class="safety"><strong>Educational use only.</strong> Not a diagnosis or a clinically validated risk estimate. For an emergency, call 911 in the US or your local emergency number.</div>
+  <main>
+    <section id="auth" class="auth-layout">
+      <div class="intro">
+        <p class="eyebrow">YOUR HEALTH DATA, EXPLAINED WITH CONTEXT</p>
+        <h1>A clearer view.<br>A better conversation.</h1>
+        <p>Explore three machine-learning research modules, understand your report, and find source-backed information for your next conversation with a clinician.</p>
+        <div class="intro-grid"><div><strong>03</strong><span>Disease modules</span></div><div><strong>Local</strong><span>Storage by default</span></div><div><strong>Cited</strong><span>Educational guidance</span></div></div>
+        <p class="muted">Synthetic demo models illustrate the workflow only. They cannot estimate your health risk. Please use fictional data for demonstrations.</p>
+      </div>
+      <form id="auth-form" class="panel">
+        <p class="eyebrow">WELCOME TO HEALTHLENS</p>
+        <h2 id="auth-title">Sign in to your workspace</h2>
+        <label for="auth-user">Username</label>
+        <input id="auth-user" autocomplete="username" minlength="3" maxlength="50" pattern="[A-Za-z0-9_.-]+" required>
+        <button id="account-check" class="quiet" type="button">Check account</button>
+        <p id="account-status" class="muted" role="status" aria-live="polite" hidden></p>
+        <label for="auth-password">Password</label>
+        <input id="auth-password" type="password" autocomplete="current-password" minlength="12" maxlength="128" required>
+        <p class="muted">Use at least 12 characters. Do not reuse a real account password.</p>
+        <button id="auth-submit" type="submit">Sign in</button>
+        <button id="auth-toggle" class="quiet" type="button">New here? Create an account</button>
+      </form>
+    </section>
+    <section id="workspace" hidden>
+      <div class="page-heading"><div><p class="eyebrow">RESEARCH WORKSPACE</p><h1>Your health overview</h1><p class="muted">Enter measurements. Explore model outputs. Keep the limitations in view.</p></div><span class="badge" id="model-badge">Models loading</span></div>
+      <nav aria-label="Workspace sections">
+        <button class="tab active" data-tab="assessment">New assessment</button>
+        <button class="tab" data-tab="history">Assessment history</button>
+        <button class="tab" data-tab="chat">Knowledge assistant</button>
+        <button class="tab" data-tab="models">Model evaluation</button>
+        <button class="tab" data-tab="privacy">Privacy & account</button>
+      </nav>
+      <section id="tab-assessment" class="tab-content">
+        <div id="disease-cards" class="disease-grid"></div>
+        <div class="assessment-grid">
+          <form id="assessment-form" class="panel">
+            <p class="eyebrow">STEP 1 / CONFIRM YOUR INPUTS</p>
+            <h2 id="feature-heading">Health measurements</h2>
+            <p class="muted">Adults 18+ only. Use the specified units; no conversion is performed. Do not perform an exercise test just to fill this form.</p>
+            <div class="upload-box"><label for="report-file">Import a structured report (optional)</label><input id="report-file" type="file" accept=".txt,.csv,.pdf"><button type="button" class="secondary" id="upload">Extract draft values</button><small>UTF-8 TXT/CSV or text PDF, up to 2 MB / 10 pages. No scans or OCR. Use canonical field names; see README and samples.</small></div>
+            <div id="features" class="feature-grid"></div>
+            <label class="check"><input id="confirmed" type="checkbox" required><span>I verified the values, units and measurement context. I understand this output is for research, not a medical assessment.</span></label>
+            <button type="submit" id="assess-submit">Run educational model</button>
+          </form>
+          <aside class="panel result-panel">
+            <p class="eyebrow">STEP 2 / UNDERSTAND THE OUTPUT</p>
+            <div id="result-empty"><div class="empty-icon">+</div><h2>Context before conclusions.</h2><p class="muted">Your model output and cited guidance appear here. A score cannot confirm or exclude a disease.</p></div>
+            <div id="result" hidden></div>
+          </aside>
+        </div>
+      </section>
+      <section id="tab-history" class="tab-content" hidden><div class="panel"><h2>Saved assessments</h2><p class="muted">Only your account can access these records. Download or delete individual reports.</p><div id="history-list"></div><button id="history-more" class="secondary" hidden>Load more</button></div></section>
+      <section id="tab-chat" class="tab-content" hidden>
+        <div class="panel chat-panel"><p class="eyebrow">ADAPTIVE RETRIEVAL / REVIEWED SOURCES</p><h2>A little more understanding.</h2><p>Ask about healthy eating, appropriate activity, or discussing results with a clinician. This small, curated knowledge base cannot answer every medical question.</p>
+          <div id="chat-messages" aria-live="polite"></div>
+          <form id="chat-form"><label for="chat-disease">Topic</label><select id="chat-disease"><option value="">General information</option><option value="diabetes">Diabetes</option><option value="heart">Heart disease</option><option value="kidney">Kidney disease</option></select><label for="question">Your question</label><textarea id="question" minlength="3" maxlength="1500" rows="3" placeholder="What should I ask my clinician about kidney nutrition?" required></textarea>
+          <label class="check"><input type="checkbox" id="external-consent"><span>For this question only, allow <span id="external-provider-name">the configured AI provider</span> to process my question and reviewed source excerpts. Do not include names or other identifiers. Saved assessments and uploads are not sent.</span></label><p class="muted" id="provider-notice"></p><button type="submit">Find cited guidance</button></form>
+        </div>
+      </section>
+      <section id="tab-models" class="tab-content" hidden><div class="panel"><h2>Transparent model evaluation</h2><p>Models are selected using 4-fold cross-validation on the training partition, then evaluated on a held-out 20% test partition. Scores on synthetic data measure the artificial task, not clinical performance. CSV-trained models also remain unvalidated.</p><div id="model-details"></div></div></section>
+      <section id="tab-privacy" class="tab-content" hidden><div class="panel"><h2>Your data & this prototype</h2><p>Account hashes, sessions and confirmed assessments are stored in the application's local SQLite database. Original uploads and chat messages are not retained by the application. File parsing may use operating-system temporary storage; filesystem encryption and temporary-file handling are deployment responsibilities.</p><p>Health inputs are not application-encrypted at rest. Use fictional data locally. Before real patient use, arrange clinical validation, consent, encrypted storage, access review, retention, backups and legal/compliance review. Account deletion removes active records but not external copies or backups.</p><form id="delete-account-form"><h3>Delete account and all saved assessments</h3><label for="delete-password">Confirm your password</label><input id="delete-password" type="password" autocomplete="current-password" minlength="12" required><button class="danger" type="submit">Permanently delete my account</button></form></div></section>
+    </section>
+    <div id="status" role="status" aria-live="polite" hidden></div>
+  </main>
+  <footer>HealthLens / Final-year research project <span>Built for learning. Designed for transparency.</span></footer>
+</body>
+</html>

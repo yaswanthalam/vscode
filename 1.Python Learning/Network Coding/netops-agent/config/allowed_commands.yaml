@@ -1,0 +1,67 @@
+# ---------------------------------------------------------------------------
+# HARD allowlist. A command must match one of these regexes (full match,
+# case-insensitive, after whitespace is normalised) or it is rejected BEFORE
+# the AI ever sees it. The AI review is a second opinion, never the gate.
+# Add commands here deliberately, via code review.
+# ---------------------------------------------------------------------------
+common:
+  - '^show version( detail)?$'
+  - '^show (lacp|port-channel) (summary|neighbor|neighbors|internal|counters)( .*)?$'
+  - '^show isis (neighbors?|adjacency|database|interface|summary)( .*)?$'
+  - '^show interfaces?( status| description| counters( errors)?| brief| terse)?( [\w/.:-]+)?$'
+  - '^show (ip|ipv6) (route|interface brief|bgp summary)( [\w/.:-]+)?$'
+  - '^show bgp( ipv4| ipv6)?( unicast)? summary$'
+  - '^show logging( last \d+| \| .*)?$'
+  - '^show log messages$'
+  - '^show (inventory|module|environment|platform|clock|uptime|boot|bootvar|reload cause)( .*)?$'
+  - '^show (lldp|cdp) neighbors( detail)?$'
+  - '^show (system (commit|software|uptime|users)|install (log|active|summary))( .*)?$'
+  - '^show (configuration commit list|archive log config all)( .*)?$'
+  - '^show users$'
+  - '^show running-config( interface [\w/.:-]+| router isis.*)?$'
+
+# Pipe modifiers that are safe to append (filtering only, nothing that writes).
+allowed_pipes:
+  - '^(include|exclude|begin|section|match|except|grep) [\w ./:()\-\[\]*+?^$]{1,80}$'
+  - '^count$'
+  - '^last \d{1,4}$'
+  - '^no-more$'
+  - '^(display )?json$'
+
+max_pipes: 2
+max_length: 200
+
+# Words that can never appear in the command itself or as a pipe keyword.
+# (Search text after '| include' is limited to plain characters by allowed_pipes.)
+denied_words:
+  - configure
+  - conf
+  - reload
+  - reboot
+  - request
+  - delete
+  - copy
+  - write
+  - erase
+  - format
+  - clear
+  - debug
+  - undebug
+  - run
+  - bash
+  - shell
+  - start
+  - python
+  - guestshell
+  - redirect
+  - tee
+  - append
+  - save
+  - file
+  - tftp
+  - scp
+  - ftp
+  - http
+  - telnet
+  - ssh
+  - tech-support   # very heavy on CPU; collect through your normal process

@@ -1,0 +1,34 @@
+[
+  {
+    "id": "diabetes-living",
+    "disease": "diabetes",
+    "title": "NIDDK: Healthy living with diabetes",
+    "url": "https://www.niddk.nih.gov/health-information/diabetes/overview/healthy-living-with-diabetes",
+    "reviewed": "2026-10-30",
+    "text": "Healthy eating and regular physical activity can help people manage diabetes. Work with a healthcare professional on a realistic eating and activity plan. A model score does not establish a diabetes diagnosis."
+  },
+  {
+    "id": "kidney-nutrition",
+    "disease": "kidney",
+    "title": "CDC: Diabetes and kidney disease - what to eat",
+    "url": "https://www.cdc.gov/diabetes/healthy-eating/diabetes-and-kidney-disease-food.html",
+    "reviewed": "2026-10-30",
+    "text": "Kidney nutrition depends on kidney function, treatment and individual needs. Discuss sodium, protein, potassium, phosphorus and fluid needs with a renal dietitian. Do not start salt substitutes, herbal supplements or restrictive diets without professional advice."
+  },
+  {
+    "id": "heart-kidney",
+    "disease": "heart",
+    "title": "CDC: Chronic kidney disease, diabetes, and heart disease",
+    "url": "https://www.cdc.gov/kidney-disease/risk-factors/link-between-diabetes-and-heart-disease.html",
+    "reviewed": "2026-10-30",
+    "text": "Diabetes, kidney disease and heart disease share risk factors. Discuss blood pressure, blood sugar, cholesterol, smoking and appropriate physical activity with a healthcare professional. Do not begin exercise during chest pain or other concerning symptoms."
+  },
+  {
+    "id": "kidney-prevention",
+    "disease": "kidney",
+    "title": "NIDDK: Preventing chronic kidney disease",
+    "url": "https://www.niddk.nih.gov/health-information/kidney-disease/chronic-kidney-disease-ckd/prevention/",
+    "reviewed": "2026-10-30",
+    "text": "Managing diabetes and high blood pressure helps protect kidney health. Ask your clinician about appropriate kidney tests and an eating plan tailored to your needs. A single creatinine measurement or a model result cannot establish chronic kidney disease."
+  }
+]

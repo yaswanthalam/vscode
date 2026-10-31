@@ -1,0 +1,8 @@
+fastapi>=0.110
+uvicorn[standard]>=0.29
+pyyaml>=6.0
+netmiko>=4.3
+azure-identity>=1.16
+azure-kusto-data>=4.4
+azure-keyvault-secrets>=4.8
+openai>=1.30

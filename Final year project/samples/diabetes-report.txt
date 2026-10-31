@@ -1,0 +1,4 @@
+age: 45
+glucose: 110
+bmi: 26.4
+systolic_bp: 120

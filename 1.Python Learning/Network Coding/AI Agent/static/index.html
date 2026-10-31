@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Network Lens | Read-only AI Agent</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <header><div><span class="eyebrow">YOUR LAB. YOUR EVIDENCE.</span><h1>Network Lens</h1>
+    <p>Read-only network troubleshooting, without the terminal hopping.</p></div>
+    <span id="mode" class="badge">Disconnected</span></header>
+  <main>
+    <section id="connect-panel" class="panel">
+      <h2>Connect to your local agent</h2>
+      <p>Paste the session token printed by <code>python app.py</code>. Device passwords and AI API keys stay in the local backend.</p>
+      <form id="connect-form"><label for="token">Local session token</label>
+        <div class="row"><input id="token" type="password" autocomplete="off" required placeholder="Token from your terminal">
+          <button type="submit">Connect</button></div></form>
+    </section>
+    <div id="workspace" hidden>
+      <div id="notice" class="notice"></div>
+      <section class="panel"><div class="section-head"><h2>Device scope</h2><span>SSH / Cisco IOS</span></div>
+        <div id="devices" class="devices"></div>
+        <p class="muted">R1 &mdash; 10.12.12.0/30 &mdash; R2 &mdash; 10.23.23.0/30 &mdash; R3</p>
+        <p class="muted">Every selected device must be checked. Deselect devices you do not want queried. Cards show inventory, not connection health.</p>
+      </section>
+      <section class="panel">
+        <h2>Ask the troubleshooting agent</h2>
+        <div id="examples" class="examples">
+          <button type="button" class="example">Check interfaces and CPU on selected routers</button>
+          <button type="button" class="example">Are BGP and IS-IS neighbors up?</button>
+          <button type="button" class="example">When was IOS downgraded and who did it?</button>
+          <button type="button" class="example">Check LACP summary and power</button>
+        </div>
+        <form id="ask-form"><label for="question">Troubleshooting question</label>
+          <textarea id="question" rows="3" maxlength="2000" required placeholder="For example: show the OS version and check whether R1 interfaces are up"></textarea>
+          <div class="row"><p class="muted">Up to 12 approved checks per request. No configuration or privilege escalation.</p>
+            <button type="submit" id="ask-button">Investigate</button></div>
+        </form>
+        <details><summary>Run an exact approved show command (no AI provider calls)</summary>
+          <form id="command-form" class="row"><label for="command">Read-only command</label>
+            <select id="command"></select><button type="submit">Run command</button></form>
+        </details>
+      </section>
+      <section id="result-panel" class="panel" hidden>
+        <div class="section-head"><h2>Investigation</h2><button id="export" type="button" class="secondary" disabled>Export JSON</button></div>
+        <p id="run-meta" class="muted"></p><p id="ai-route" class="muted"></p><pre id="answer" class="answer"></pre>
+        <details><summary>Evidence limits and data handling</summary><ul id="warnings"></ul></details>
+        <h3>Command plan</h3><div id="plan" class="plan"></div>
+        <h3>Evidence <small>(including available prior records)</small></h3><div id="evidence"></div>
+      </section>
+      <section class="panel"><details><summary>Add historical syslog / AAA evidence</summary>
+        <p>Paste retained log text for a device. Logs are unverified and cannot prove an actor on their own. Secrets are redacted best effort.
+          Imported text may be sent to enabled AI providers during the next live investigation.</p>
+        <form id="import-form"><label for="log-device">Device</label><select id="log-device"></select>
+          <label for="log-text">Log text (maximum 24,000 characters)</label><textarea id="log-text" maxlength="24000" rows="5" required></textarea>
+          <button type="submit">Store local evidence</button></form>
+      </details></section>
+    </div>
+    <p id="status" role="status" aria-live="polite"></p>
+  </main>
+  <footer>Local single-user lab tool &middot; Read-only command policy &middot; Evidence, not guesses</footer>
+</body>
+</html>

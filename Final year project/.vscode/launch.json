@@ -1,0 +1,33 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "HealthLens: private HTTPS tunnel (no certificate install)",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "app.serve",
+      "args": ["--private-tunnel", "--tunnel-origin", "${input:tunnelOrigin}"],
+      "cwd": "${workspaceFolder}",
+      "envFile": "${workspaceFolder}\\.env",
+      "justMyCode": true
+    },
+    {
+      "name": "HealthLens: optional direct local TLS",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "app.serve",
+      "args": [],
+      "cwd": "${workspaceFolder}",
+      "envFile": "${workspaceFolder}\\.env",
+      "justMyCode": true
+    }
+  ],
+  "inputs": [
+    {
+      "id": "tunnelOrigin",
+      "type": "promptString",
+      "description": "Exact private HTTPS URL from Ports panel; leave blank for initial port-forward setup",
+      "default": ""
+    }
+  ]
+}

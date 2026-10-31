@@ -1,0 +1,87 @@
+[
+  {
+    "run_id": "24db314a-541a-4a23-a90a-512d1acc1d5a",
+    "mode": "demo",
+    "kusto_sufficient": true,
+    "finding": "Recent normalized snapshot available.",
+    "fallback": "not_needed",
+    "ai_status": "disabled",
+    "interpretation": "AI is disabled. Review the source evidence and deterministic findings below.",
+    "limitations": [],
+    "evidence": [
+      {
+        "id": "K1",
+        "source": "kusto",
+        "record": {
+          "Timestamp": "2026-10-27T17:35:45.056790+00:00",
+          "Device": "lab-router-01",
+          "Check": "version",
+          "EventType": "snapshot",
+          "Message": "OS version 10.3 (synthetic demo)",
+          "Actor": "",
+          "ChangeId": ""
+        }
+      }
+    ]
+  },
+  {
+    "run_id": "f44ee7e6-0d94-411d-a785-33c045c0c3cd",
+    "mode": "demo",
+    "kusto_sufficient": false,
+    "finding": "No matching Kusto evidence in the requested window.",
+    "fallback": "collected",
+    "ai_status": "disabled",
+    "interpretation": "AI is disabled. Review the source evidence and deterministic findings below.",
+    "limitations": [
+      "No matching Kusto evidence in the requested window.",
+      "Device evidence is supplemental and observed now; it is not Kusto truth. History may be incomplete."
+    ],
+    "evidence": [
+      {
+        "id": "D1",
+        "source": "device",
+        "observed_at": "2026-10-27T17:37:45.061806+00:00",
+        "command": "show isis neighbors",
+        "output": "Neighbor lab-router-02 UP (synthetic device)",
+        "truncated": false
+      }
+    ]
+  },
+  {
+    "run_id": "f59798e9-2bcb-4a9e-a013-a87d5110a1bc",
+    "mode": "demo",
+    "kusto_sufficient": false,
+    "finding": "Version-change evidence exists, but actor attribution is missing.",
+    "fallback": "collected",
+    "ai_status": "disabled",
+    "interpretation": "AI is disabled. Review the source evidence and deterministic findings below.",
+    "limitations": [
+      "Version-change evidence exists, but actor attribution is missing.",
+      "Device evidence is supplemental and observed now; it is not Kusto truth. History may be incomplete.",
+      "Version ordering is vendor-specific. A version-change record alone does not prove downgrade or human identity. Correlate authoritative AAA accounting and change records."
+    ],
+    "evidence": [
+      {
+        "id": "K1",
+        "source": "kusto",
+        "record": {
+          "Timestamp": "2026-10-25T17:37:45.064126+00:00",
+          "Device": "lab-router-01",
+          "Check": "history",
+          "EventType": "version-change",
+          "Message": "Version changed 10.4 to 10.3; CHG-DEMO-1042; actor not recorded.",
+          "Actor": "",
+          "ChangeId": "CHG-DEMO-1042"
+        }
+      },
+      {
+        "id": "D1",
+        "source": "device",
+        "observed_at": "2026-10-27T17:37:45.065317+00:00",
+        "command": "show logging",
+        "output": "Local log buffer has no retained upgrade/AAA attribution. (synthetic device)",
+        "truncated": false
+      }
+    ]
+  }
+]
